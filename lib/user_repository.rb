@@ -1,4 +1,5 @@
 require_relative 'user'
+require_relative 'database_connection'
 
 class UserRepository
     def all
@@ -19,10 +20,9 @@ class UserRepository
         user.id = record['id'].to_i
         user.email = record['email']
         user.pass_word = record['pass_word']
-  
+        
         users << user
       end
-  
       return users
     end
   

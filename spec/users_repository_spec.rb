@@ -18,7 +18,7 @@ describe UserRepository do
 
     users = repo.all
     
-    expect(users.length).to eq(2)
+    expect(users.length).to eq(4)
     expect(users.first.email).to eq('rex@rex.com')
   end
 
@@ -31,17 +31,17 @@ describe UserRepository do
 #     expect(artist.name).to eq('Taylor Swift')
 #   end
 
-  xit 'creates an user' do
+  it 'creates an user' do
     repo = UserRepository.new
 
     user = User.new
     user.email = 'maria@maria.com'
     user.pass_word = 'maria@123'
-    repo.create(artist)
+    repo.create(user)
 
     users = repo.all
 
-    expect(users.length).to eq(3)
+    expect(users.length).to eq(5)
     expect(users.last.email).to eq('maria@maria.com')
   end
 end

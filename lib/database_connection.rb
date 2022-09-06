@@ -1,5 +1,3 @@
-# file: lib/database_connection.rb
-
 require 'pg'
 
 # This class is a thin "wrapper" around the
@@ -10,7 +8,12 @@ class DatabaseConnection
   # This method connects to PostgreSQL using the 
   # PG gem. We connect to 127.0.0.1, and select
   # the database name given in argument.
-  def self.connect(database_name)
+  def self.connect
+    if ENV['ENV'] == 'test'
+      database_name = 'mangobnb_test'
+    else
+      database_name = 'mangobnb'
+    end
     @connection = PG.connect({ host: '127.0.0.1', dbname: database_name })
   end
 
