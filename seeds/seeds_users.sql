@@ -1,8 +1,3 @@
---Create users table
-
--- Database :
--- Table - users ; columns - id , email, password
-
 DROP TABLE IF EXISTS users; 
 
 -- Table Definition
@@ -16,5 +11,6 @@ TRUNCATE TABLE users RESTART IDENTITY;
 
 INSERT INTO users ("email", "pass_word") VALUES
 ('rex@rex.com', 'rex@123'),
-('Rick@rick.com', 'rick@123')
-;
+('Rick@rick.com', 'rick@123'),
+('maria@gmail.com', 'maria123@£@'),
+('raz@razbugoi.co.uk', 'rxcvx21@!*&');
