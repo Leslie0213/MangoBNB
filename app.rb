@@ -1,6 +1,8 @@
 # file: app.rb
 require_relative 'lib/user_repository'
 require_relative 'lib/user'
+require_relative 'lib/space_repository'
+require_relative 'lib/space'
 require_relative 'lib/database_connection'
 require 'sinatra/base'
 require 'sinatra/reloader'
@@ -52,12 +54,32 @@ class Application < Sinatra::Base
   get '/login' do 
     return erb(:login)
   end
+=======
+  #Route design for spaces !!!!!
 
   get '/spaces' do
-    return erb(:spaces)
+    repo = SpaceRepository.new
+    @spaces = repo.all
+
+    return erb(:display_spaces)
   end
 
-  def invalid_request_parameters? 
-    return (params[:email] == nil || params[:pass_word] == nil)
+  post '/spaces' do
+    repo = SpaceRepository.new
+    new_space = Space.new
+
+
+    new_space.name = params[:name]
+    new_space.description = params[:description]
+    new_space.price = params[:price]
+    new_space.user_id = params[:user_id]
+    repo.create(new_space)
+
+    redirect '/spaces'
   end
+
+  get '/new_space' do
+    return erb(:create_space)
+  end
+
 end
