@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS users; 
+DROP TABLE IF EXISTS users cascade; 
 
 -- Table Definition
 CREATE TABLE users (

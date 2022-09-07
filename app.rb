@@ -1,6 +1,8 @@
 # file: app.rb
 require_relative 'lib/user_repository'
 require_relative 'lib/user'
+require_relative 'lib/space_repository'
+require_relative 'lib/space'
 require_relative 'lib/database_connection'
 require 'sinatra/base'
 require 'sinatra/reloader'
@@ -39,5 +41,16 @@ class Application < Sinatra::Base
 
     return erb(:sign_up_confirmation)
   end
+
+  #Route design for spaces !!!!!
+
+  get '/spaces' do
+    repo = SpaceRepository.new
+    @spaces = repo.all
+
+    return erb(:display_spaces)
+  end
+
+
 
 end
