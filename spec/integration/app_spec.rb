@@ -22,8 +22,7 @@ describe Application do
         response = post('/users', email: 'razbugoi@gmail.com', pass_word: '123asd')
   
         expect(response.status).to eq 200
-        expect(response.body).to eq "<h1>Signed up successfully</h1>"
-  
+        expect(response.body).to eq ''
         response = get('/users')
   
         expect(response.body).to include('razbugoi@gmail.com')

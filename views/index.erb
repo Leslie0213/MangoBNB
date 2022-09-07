@@ -17,8 +17,10 @@
       </a>
 
       <div class="col-md-3 text-end">
-        <button type="button" class="btn btn-outline-primary me-2">Login</button>
-        <button type="button" class="btn btn-primary">Sign-up</button>
+        <button type="button" class="btn btn-outline-primary me-2">About</button>
+        <a href="/login">
+        <button type="button" class="btn btn-primary">Login</button>
+        </a>
       </div>
     </header>
   </div>
@@ -29,24 +31,40 @@
   
 
   <div class="container justify-content-center">
-    <form method="POST" action="/users">
-    <div class="mb-3">
-      <label for="exampleInputEmail1" class="form-label">Email address</label>
-      <input type="email" name="email"class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-      <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-    </div>
-    <div class="mb-3">
-      <label for="exampleInputPassword1" class="form-label">Password</label>
-      <input type="password" name="pass_word" class="form-control" id="exampleInputPassword1">
-    </div>
-    <div class="mb-3">
-      <label for="exampleInputPassword2" class="form-label">Confirm Password</label>
-      <input type="password" class="form-control" id="exampleInputPassword1">
-    </div>
-    <button type="submit" class="btn btn-primary">Sign up</button>
+    <form id="form" method="POST" action="/users">
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Email address</label>
+        <input type="email" name="email" class="form-control" id="email" aria-describedby="emailHelp" minlength="5" maxlength="30" required>
+        <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+      </div>
+      <div class="mb-3">
+        <label for="pass_word" class="form-label">Password</label>
+        <input type="password" name="pass_word" class="form-control" id="pass_word" minlength="4" maxlength="12" required>
+      </div>
+      <div class="mb-3">
+        <label for="pass_word_confirmation" class="form-label">Confirm Password</label>
+        <input type="password" class="form-control" id="pass_word_confirmation" minlength="4" maxlength="12" required>
+      </div>
+      <button type="submit" class="btn btn-primary">Sign up</button>
+<%# 
+      <script>
+          function BothFieldsIdentical() {
+            const form = document.getElementById('form');
+            const one = document.forms[0].children[1].children['pass_word'].value;
+            const another = document.forms[0].children[2].children['pass_word_confirmation'].value;
+            if (one == another) {
+                return true;
+              } else {
+                form.addEventListener('submit', event => {
+                  event.preventDefault();
+                   alert("Oops, both fields must be identical.");
+                   return false;
+                });
+              }
+            }
+      </script> %>
     </form> 
   </div>
   
-
 </body>
 </html>

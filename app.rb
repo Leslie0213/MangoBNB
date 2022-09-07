@@ -30,6 +30,11 @@ class Application < Sinatra::Base
   end
 
   post '/users' do
+    if invalid_request_parameters?
+      status 400
+      return ''
+    end
+    
     repo = UserRepository.new
     new_user = User.new
 
@@ -39,9 +44,17 @@ class Application < Sinatra::Base
 
     repo.create(new_user)
 
-    return erb(:sign_up_confirmation)
+    redirect to('/confirmation')
   end
 
+  get '/confirmation' do
+    return erb(:confirmation)
+  end
+
+  get '/login' do 
+    return erb(:login)
+  end
+=======
   #Route design for spaces !!!!!
 
   get '/spaces' do
@@ -68,7 +81,5 @@ class Application < Sinatra::Base
   get '/new_space' do
     return erb(:create_space)
   end
-
-
 
 end
