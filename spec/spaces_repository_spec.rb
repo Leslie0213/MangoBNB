@@ -31,17 +31,19 @@ describe SpaceRepository do
 #     expect(artist.name).to eq('Taylor Swift')
 #   end
 
-  xit 'creates an user' do
-    repo = UserRepository.new
+  it 'creates a new space' do
+    repo = SpaceRepository.new
 
-    user = User.new
-    user.email = 'maria@maria.com'
-    user.pass_word = 'maria@123'
-    repo.create(user)
+    space = Space.new
+    space.name = 'Holiday Cottages'
+    space.description = 'nice cozy cottages'
+    space.price = 120
+    space.user_id = 1
+    repo.create(space)
 
-    users = repo.all
+    spaces = repo.all
 
-    expect(users.length).to eq(5)
-    expect(users.last.email).to eq('maria@maria.com')
+    expect(spaces.length).to eq(8)
+    expect(spaces.last.name).to eq('Holiday Cottages')
   end
 end
