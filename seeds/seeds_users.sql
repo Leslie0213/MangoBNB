@@ -1,4 +1,6 @@
+-- added cascade to prevent errors due to foreign key dependency  between spaces and users
 DROP TABLE IF EXISTS users cascade; 
+
 
 -- Table Definition
 CREATE TABLE users (
