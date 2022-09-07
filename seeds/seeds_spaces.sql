@@ -1,4 +1,6 @@
-DROP TABLE IF EXISTS spaces; 
+--DROP TABLE IF EXISTS users; 
+-- added cascade to prevent errors due to foreign key dependency  between spaces and users
+DROP TABLE IF EXISTS spaces cascade; 
 
 -- Create the table without the foreign key first.
 -- CREATE TABLE spaces (
