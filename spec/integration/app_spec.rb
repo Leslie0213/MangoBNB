@@ -22,11 +22,21 @@ describe Application do
         response = post('/users', email: 'razbugoi@gmail.com', pass_word: '123asd')
   
         expect(response.status).to eq 200
-        expect(response.body).to eq "<h1>Signed up successfully</h1>"
-  
+        expect(response.body).to eq ''
         response = get('/users')
   
         expect(response.body).to include('razbugoi@gmail.com')
       end
     end
+
+    # context 'GET /session/new' do
+    #   it 'returns the HTML form to log in as a user' do
+    #     response = get('/session/new')
+  
+    #     expect(response.status).to eq 200
+    #     expect(response.body).to include('<form method="POST" action="/users">')
+    #     expect(response.body).to include('<input type="text" name="email" />')
+    #     expect(response.body).to include('<input type="text" name="pass_word" />')
+    #   end
+    # end
 end

@@ -28,6 +28,11 @@ class Application < Sinatra::Base
   end
 
   post '/users' do
+    if invalid_request_parameters?
+      status 400
+      return ''
+    end
+    
     repo = UserRepository.new
     new_user = User.new
 
@@ -37,7 +42,22 @@ class Application < Sinatra::Base
 
     repo.create(new_user)
 
-    return erb(:sign_up_confirmation)
+    redirect to('/confirmation')
   end
 
+  get '/confirmation' do
+    return erb(:confirmation)
+  end
+
+  get '/login' do 
+    return erb(:login)
+  end
+
+  get '/spaces' do
+    return erb(:spaces)
+  end
+
+  def invalid_request_parameters? 
+    return (params[:email] == nil || params[:pass_word] == nil)
+  end
 end
