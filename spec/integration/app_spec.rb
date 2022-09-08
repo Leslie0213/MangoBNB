@@ -21,7 +21,7 @@ describe Application do
       it 'creates a new user in the database' do
         response = post('/users', email: 'razbugoi@gmail.com', pass_word: '123asd')
   
-        expect(response.status).to eq 200
+        expect(response.status).to eq 302
         expect(response.body).to eq ''
         response = get('/users')
   
