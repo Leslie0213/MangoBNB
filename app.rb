@@ -16,7 +16,7 @@ class Application < Sinatra::Base
   configure :development do
     register Sinatra::Reloader
     also_reload 'lib/user_repository'
-    # also_reload 'lib/artist_repository'
+    also_reload 'lib/space_repository'
   end
 
   get '/' do
@@ -32,7 +32,6 @@ class Application < Sinatra::Base
 
   enable :sessions
   post '/users' do
-
     emailv = params['email']
     passwordv = params['pass_word']
     
@@ -92,13 +91,15 @@ class Application < Sinatra::Base
     new_space.name = params[:name]
     new_space.description = params[:description]
     new_space.price = params[:price]
+    new_space.available_from = params[:available_from]
+    new_space.available_to = params[:available_to]
     new_space.user_id = params[:user_id]
     repo.create(new_space)
 
     redirect '/spaces'
   end
 
-  get '/new_space' do
+  get '/spaces/new' do
     return erb(:create_space)
   end
 

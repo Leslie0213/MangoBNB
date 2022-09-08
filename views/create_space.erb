@@ -16,37 +16,47 @@
         <h1>mangobnb</h1>
       </a>
 
-      <div class="col-md-3 text-end">
-        <button type="button" class="btn btn-outline-primary me-2">Login</button>
-        <button type="button" class="btn btn-primary">Sign-up</button>
+      <div class="col-md-3 d-flex align-items-baseline justify-content-center">
+        <p>Welcome, @username</p>
+        <a href="/login">
+          <button type="button" class="btn btn-primary">Login</button>
+        </a>
       </div>
     </header>
   </div>
   
   <div class="container text-center">
-    <h1>Feel at home, anywhere</h1>
+    <h1>List a Space</h1>
   </div>
   
 
   <div class="container justify-content-center">
     <form method="POST" action="/spaces">
-    <div class="mb-3">
-    <input type="text" name="name" id="typeText" class="form-control" />
-    <label class="form-label" for="typeText">Space Name</label>
-    </div>
-    <div class="mb-3">
-    <input type="text" name="description" id="typeText" class="form-control" />
-    <label class="form-label" for="typeText">Space Description</label>
-    </div>
-    <div class="mb-3">
-    <input type="text" name="price" id="typeText" class="form-control" />
-    <label class="form-label" for="typeText">Price</label>
-    </div>
-    <div class="mb-3">
-    <input type="text" name="user_id" id="typeText" class="form-control" />
-    <label class="form-label" for="typeText">User ID</label>
-    </div>
-    <button type="submit" class="btn btn-primary">Create Space</button>
+      <div class="mb-3">
+        <label class="form-label" for="typeText">Space Name</label>
+        <input type="text" name="name" id="typeText" class="form-control" />
+      </div>
+      
+      <div class="mb-3">
+        <label class="form-label" for="typeText">Space Description</label>
+        <input type="text" name="description" id="typeText" class="form-control" />
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label" for="typeText">Price</label>
+        <input type="text" name="price" id="typeText" class="form-control" />
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label" for="available_from">Available From</label>
+        <input type="text" name="available_from" id="availabe_from" class="form-control" />
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label" for="available_to">Available To</label>
+        <input type="text" name="available_to" id="availabe_to" class="form-control" />
+      </div>
+        <button type="submit" class="btn btn-primary">Create Space</button>
     </form> 
   </div>
   
