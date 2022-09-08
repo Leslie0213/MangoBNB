@@ -7,6 +7,7 @@ require_relative 'lib/database_connection'
 require 'sinatra/base'
 require 'sinatra/reloader'
 
+
 DatabaseConnection.connect
 
 class Application < Sinatra::Base
@@ -29,17 +30,36 @@ class Application < Sinatra::Base
     return erb(:display_users)
   end
 
+  enable :sessions
   post '/users' do
+    emailv = params['email']
+    passwordv = params['pass_word']
+    
+#fetching specific users and passwords from database
     repo = UserRepository.new
-    new_user = User.new
+    user = repo.find(emailv)
 
+    if user == false
+        #repo = UserRepository.new 
+        new_user = User.new
+        new_user.email = params[:email]
+        new_user.pass_word = params[:pass_word]
+        repo.create(new_user)
+        redirect to('/confirmation')
+        
+    else
+     # binding.irb
+     session[:email_checked] = emailv
+     #@email_checked=emailv 
+      redirect '/signup_error'  
+    end 
+    
+  end
 
-    new_user.email = params[:email]
-    new_user.pass_word = params[:pass_word]
-
-    repo.create(new_user)
-
-    redirect to('/confirmation')
+  get '/signup_error' do
+    #binding.irb
+    @email_checked=session[:email_checked]
+    return erb(:signup_error)
   end
 
   get '/confirmation' do
@@ -49,6 +69,12 @@ class Application < Sinatra::Base
   get '/login' do 
     return erb(:login)
   end
+
+  get '/date' do 
+    return erb(:date)
+  end
+
+  #Route design for spaces !!!!!
 
   get '/spaces' do
     repo = SpaceRepository.new
@@ -76,5 +102,30 @@ class Application < Sinatra::Base
   get '/spaces/new' do
     return erb(:create_space)
   end
+
+  post '/login/validation' do
+    #emails=[]
+
+    #email, password returned from view
+    emailv = params['email']
+    passwordv = params['pass_word']
+    
+#fetching specific users and passwords from database
+    repo = UserRepository.new
+    user = repo.find(emailv)
+
+    if user == false
+      redirect '/authentication/error'   
+    elsif user.email == emailv && user.pass_word == passwordv
+      redirect '/spaces'
+    else
+      redirect '/authentication/error'  
+    end
+
+  end
+
+  get '/authentication/error' do
+    return erb(:authentication_error)
+  end 
 
 end

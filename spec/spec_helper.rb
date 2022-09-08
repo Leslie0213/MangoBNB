@@ -1,6 +1,12 @@
+ENV['ENV'] = 'test'
+
+require 'simplecov'
+SimpleCov.start
+
+
 require 'database_connection'
 
-ENV['ENV'] = 'test'
+
 
 DatabaseConnection.connect
 

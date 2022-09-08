@@ -26,17 +26,26 @@ class UserRepository
       return users
     end
   
-    # def find(id)
-    #   sql = 'SELECT id, name, genre FROM artists WHERE id = $1;'
-    #   result_set = DatabaseConnection.exec_params(sql, [id])
+     def find(email)
+      sql = 'SELECT email, pass_word FROM users WHERE email = $1;'
+      result_set = DatabaseConnection.exec_params(sql, [email])
+      if result_set.ntuples==0
+        return false
+      else
+        user = User.new
+        # user.id = result_set[0]['id'].to_i
+        user.email = result_set[0]['email']
+        user.pass_word = result_set[0]['pass_word'] 
+
+        return user 
+      end
+  #binding.irb
+
   
-    #   artist = Artist.new
-    #   artist.id = result_set[0]['id'].to_i
-    #   artist.name = result_set[0]['name']
-    #   artist.genre = result_set[0]['genre']
-  
-    #   return artist
-    # end
+      
+
+
+     end
   
     def create(user)
       sql = 'INSERT INTO users (email, pass_word) VALUES ($1, $2);'

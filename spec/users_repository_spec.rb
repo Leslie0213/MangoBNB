@@ -44,4 +44,16 @@ describe UserRepository do
     expect(users.length).to eq(5)
     expect(users.last.email).to eq('maria@maria.com')
   end
+
+  it 'finds specific user' do
+    repo = UserRepository.new
+
+    users = repo.find('rex@rex.com')
+    
+    # expect(users.length).to eq(1)
+    expect(users.email).to eq('rex@rex.com')
+  end
+
+
+
 end
