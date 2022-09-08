@@ -6,7 +6,7 @@ class SpaceRepository
       spaces = []
   
       # Send the SQL query and get the result set.
-      sql = 'SELECT id, name, description, price FROM spaces;'
+      sql = 'SELECT id, name, description, price, available_from, available_to, user_id FROM spaces;'
       result_set = DatabaseConnection.exec_params(sql, [])
       
       # The result set is an array of hashes.
@@ -21,6 +21,9 @@ class SpaceRepository
         space.name = record['name']
         space.description = record['description']
         space.price = record['price']
+        space.available_from = record['available_from']
+        space.available_to = record['available_to']
+        space.user_id = record['user_id']
         
         spaces << space
       end
@@ -40,8 +43,8 @@ class SpaceRepository
     # end
   
     def create(space)
-      sql = 'INSERT INTO spaces (name, description, price, user_id) VALUES ($1, $2, $3, $4);'
-      result_set = DatabaseConnection.exec_params(sql, [space.name, space.description, space.price, space.user_id])
+      sql = 'INSERT INTO spaces (name, description, price, available_from, available_to, user_id) VALUES ($1, $2, $3, $4, $5, $6);'
+      result_set = DatabaseConnection.exec_params(sql, [space.name, space.description, space.price, space.available_from, space.available_to, space.user_id])
   
       return space
     end

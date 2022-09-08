@@ -38,6 +38,8 @@ describe SpaceRepository do
     space.name = 'Holiday Cottages'
     space.description = 'nice cozy cottages'
     space.price = 120
+    space.available_from = '2022-10-10'
+    space.available_to = '2022-10-20'
     space.user_id = 1
     repo.create(space)
 

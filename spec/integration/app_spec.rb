@@ -21,8 +21,9 @@ describe Application do
       it 'creates a new user in the database' do
         response = post('/users', email: 'razbugoi@gmail.com', pass_word: '123asd')
   
-        expect(response.status).to eq 200
+        expect(response.status).to eq 302
         expect(response.body).to eq ''
+
         response = get('/users')
   
         expect(response.body).to include('razbugoi@gmail.com')
@@ -41,7 +42,7 @@ describe Application do
 
       context 'POST /spaces' do
         it 'creates a new space in the database' do
-          response = post('/spaces', name: 'Holiday Cottages', description: 'Nice cozy cottages', price: '120', user_id: '1')
+          response = post('/spaces', name: 'Holiday Cottages', description: 'Nice cozy cottages', price: '120', available_from: '2022-09-20', available_to: '2022-12-25', user_id: '1')
     
           expect(response.status).to eq 302
           expect(response.body).to eq ""
