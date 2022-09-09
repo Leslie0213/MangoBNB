@@ -71,6 +71,35 @@ class Application < Sinatra::Base
   end
 
   get '/date' do 
+
+    @name=params["name"]
+    @description=params["description"]
+    @price=params["price"]
+    @available_from=params["from"]
+    @available_from=@available_from.split("-").reverse().join("/")
+    date_from = Date.strptime(@available_from, '%d/%m/%Y')
+    @available_from= date_from.strftime('%m/%d/%Y')
+
+    @available_to=params["to"]
+    @available_to=@available_to.split("-").reverse().join("/")
+    date_to = Date.strptime(@available_to, '%d/%m/%Y')
+    @available_to= date_to.strftime('%m/%d/%Y')
+    @user_id=params["id"]
+    #binding.irb
+    return erb(:date)
+  end
+
+  post '/booking/confirmation' do
+    #binding.irb
+    @name=params["name"]
+    @daterange=params["daterange"]
+    return erb(:booking_confirmation)
+
+  end
+
+  post '/date' do 
+
+    #binding.irb
     return erb(:date)
   end
 
@@ -84,6 +113,7 @@ class Application < Sinatra::Base
   end
 
   post '/spaces' do
+
     repo = SpaceRepository.new
     new_space = Space.new
 

@@ -11,18 +11,21 @@
     <!-- adds a link to list new space on the space listing page -->
     <p><a href="/spaces/new">List New Space</a></p>
 <% @spaces.each do |space| %> 
+  <!--<form method="POST" action="/date?name=<%= space.name %>&description=<%= space.description %>&price=<%= space.price %>&from=<%= space.available_from %>&to=<%= space.available_to %>&id=<%= space.user_id %>"> -->
       <div class="card" style="width: 58rem;">
       <img class="card-img-top" src="..." alt="Space image">
       <div class="card-body">
-        <h5 class="card-title"><%= space.name %></h5>
+        <h5 class="card-title" name="name"><%= space.name %></h5>
         <p class="card-text"><%= space.description %></p>
         <p class="card-text">Price : £<%= space.price %></p>
-        <p class="card-text">Available From : <%= space.available_from %></p>
+        <!--<p class="card-text">Available From : <%= space.available_from %></p>
         <p class="card-text">Available To : <%= space.available_to %></p>
-        <p class="card-text">User ID<%= space.user_id %></p>
-        <a href="#" class="btn btn-primary">Book Now</a>
+        <p class="card-text">User ID<%= space.user_id %></p>-->
+        <a href="/date?name=<%= space.name %>&description=<%= space.description %>&price=<%= space.price %>&from=<%= space.available_from %>&to=<%= space.available_to %>&id=<%= space.user_id %>" class="btn btn-primary">Book Now</a> 
+       <!-- <button type="submit" class="btn btn-primary">Book Now</button> -->
       </div>
     </div>
+    <!-- </form> -->
 <% end %>
 
 
