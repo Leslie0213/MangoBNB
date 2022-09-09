@@ -18,7 +18,7 @@ class Application < Sinatra::Base
     also_reload 'lib/user_repository'
     also_reload 'lib/space_repository'
   end
-
+  enable :sessions
   get '/' do
     return erb(:index)
   end
@@ -30,7 +30,7 @@ class Application < Sinatra::Base
     return erb(:display_users)
   end
 
-  enable :sessions
+  
   post '/users' do
     emailv = params['email']
     passwordv = params['pass_word']
@@ -63,7 +63,14 @@ class Application < Sinatra::Base
   end
 
   get '/confirmation' do
+
+    @user_name=session[:user_name] 
+   #binding.irb
+   if @user_name==nil
+    redirect '/session/invalid'
+   else
     return erb(:confirmation)
+   end
   end
 
   get '/login' do 
@@ -71,6 +78,12 @@ class Application < Sinatra::Base
   end
 
   get '/date' do 
+
+    @user_name=session[:user_name] 
+    #binding.irb
+    if @user_name==nil
+     redirect '/session/invalid'
+    else
 
     @name=params["name"]
     @description=params["description"]
@@ -87,14 +100,21 @@ class Application < Sinatra::Base
     @user_id=params["id"]
     #binding.irb
     return erb(:date)
+
+    end
   end
 
   post '/booking/confirmation' do
     #binding.irb
+    @user_name=session[:user_name] 
+    #binding.irb
+    if @user_name==nil
+     redirect '/session/invalid'
+    else
     @name=params["name"]
     @daterange=params["daterange"]
     return erb(:booking_confirmation)
-
+    end
   end
 
   post '/date' do 
@@ -103,13 +123,23 @@ class Application < Sinatra::Base
     return erb(:date)
   end
 
+  get '/session/invalid' do
+    return erb(:invalid_session)
+  end
+
   #Route design for spaces !!!!!
 
   get '/spaces' do
+    @user_name=session[:user_name] 
+   #binding.irb
+   if @user_name==nil
+    redirect '/session/invalid'
+   else
     repo = SpaceRepository.new
     @spaces = repo.all
 
     return erb(:display_spaces)
+   end
   end
 
   post '/spaces' do
@@ -130,7 +160,13 @@ class Application < Sinatra::Base
   end
 
   get '/spaces/new' do
+    @user_name=session[:user_name] 
+   #binding.irb
+   if @user_name==nil
+    redirect '/session/invalid'
+   else
     return erb(:create_space)
+   end
   end
 
   post '/login/validation' do
@@ -147,6 +183,9 @@ class Application < Sinatra::Base
     if user == false
       redirect '/authentication/error'   
     elsif user.email == emailv && user.pass_word == passwordv
+      #Declare session variable here !!!!
+      session[:user_name] = user.email
+      #<%= @email_checked %>
       redirect '/spaces'
     else
       redirect '/authentication/error'  

@@ -22,15 +22,31 @@
 	<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
 </head>
 
-<body style="background-color: yellow;">
+<body style="background-color: white;">
+
+<div class="container">
+    <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+      <a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
+      <h1 style="color:orange;">MangoBnB</h1>
+      </a>
+
+      <div class="col-md-3 d-flex align-items-baseline justify-content-center">
+      <p>Welcome, <a style="color:green;"><%= @user_name %></a></p>
+       <!-- <a href="/login">
+          <button type="button" class="btn btn-primary">Login</button>
+        </a> -->
+      </div>
+    </header>
+  </div>
+
     <section class="container">
-        <h1 class="pt-4 pb-2"><%= @name %></h1>
+        <h1 class="pt-4 pb-2" style="color:teal;"><%= @name %></h1>
 		<h3 class="pt-4 pb-2"><a style="color:green;"><%= @description %></a></h3>
 		<h3 class="pt-4 pb-2"><a style="color:blue;">Book it just for <a style="color:red;">£<%= @price %></a>/night</a></h3>
 	
 		<h3 class="pt-4 pb-2"><a style="color:purple;">Available to book from  <%= @available_from %> until  <%= @available_to %> </a></h3> 
 		
-		<%= @user_id %>
+		<!-- <%= @user_id %> -->
 
         <form method="POST" action="/booking/confirmation?name=<%= @name %>">
             <div class="row form-group">
